@@ -9,6 +9,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 # Working with mongoDB
 DATABASE_URI = 'localhost'
 DATABASE_PORT = 27015
+DATABASE_COLLECTION_NAME = 'temp'
 DATABASE_CONNECT_OPTIONS = {}
 
 #Define telegram bot configs

@@ -1,10 +1,10 @@
 # module working with mongo
 from pymongo import MongoClient
-from config import database_name, collection_name
+from config import DATABASE_URI, DATABASE_COLLECTION_NAME
 
 client = MongoClient('localhost', 27017)
-db = client[database_name]
-music = db[collection_name]
+db = client[DATABASE_URI]
+music = db[DATABASE_COLLECTION_NAME]
 
 
 def select_all():
