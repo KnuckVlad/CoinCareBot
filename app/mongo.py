@@ -1,9 +1,9 @@
 # module working with mongo
 from pymongo import MongoClient
-from config import DATABASE_URI, DATABASE_COLLECTION_NAME
+from config import DATABASE_NAME, DATABASE_COLLECTION_NAME
 
 client = MongoClient('localhost', 27017)
-db = client[DATABASE_URI]
+db = client[DATABASE_NAME]
 music = db[DATABASE_COLLECTION_NAME]
 
 
