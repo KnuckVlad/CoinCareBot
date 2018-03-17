@@ -7,7 +7,7 @@ import config
 import logging
 from telegram.ext import Updater
 
-#Define logging section
+# Define logging section
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
 
@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(leve
 
 # Creating bot
 bot = telegram.Bot(token=config.TOKEN)
-botName = "Bot Name"  # Without @
+botName = "CoinBot"  # Without @
 ## updater instance
 updater = Updater(token=config.TOKEN)
 ##dispatcher instance
