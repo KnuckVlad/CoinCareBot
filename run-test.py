@@ -7,7 +7,9 @@ from config import HOST_PORT, HOST_URI
 # using app.bot.setWebhook() if we have external web server
 # on localhost using polling()
 print(flask_app.logger_name)
-flask_app.run(host=HOST_URI,
+flask_app.run(
+        host=HOST_URI,
         port=HOST_PORT,
         ssl_context='adhoc',
-        debug=True)
+        debug=True
+        )
