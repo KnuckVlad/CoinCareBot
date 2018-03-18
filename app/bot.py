@@ -2,13 +2,14 @@ from config import TOKEN, HOST_PORT, HOST_URI
 from . import bot
 
 
-def echo(update):
+def echo(bot, update):
+    print('Echo!!!')
     bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
 
 def start(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="I'm a bot, please talk to me!"
                                                           "Why You cut your hair?"
-                                                          "Dyed it back!")
+                                                          "Modified file")
 
 
 def set_webhook():

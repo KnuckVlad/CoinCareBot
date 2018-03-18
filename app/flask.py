@@ -1,7 +1,7 @@
 from . import Flask, dispatcher, updater
 from config import TOKEN
-from .bot import start
-from telegram.ext import CommandHandler
+from .bot import start, echo
+from telegram.ext import CommandHandler, MessageHandler, Filters
 
 flask_app = Flask(__name__)
 
@@ -12,9 +12,11 @@ def hello():
 
 @flask_app.route('/activate', methods=['POST', 'GET'])
 def activate():
-    print('START!')
     start_handler = CommandHandler('start', start)
+    echo_handler = MessageHandler(Filters.text, echo)
+    dispatcher.add_handler(echo_handler)
     dispatcher.add_handler(start_handler)
+    print('add Echo!')
     updater.start_polling()
     return 'OK'
 
