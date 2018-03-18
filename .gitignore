@@ -26,6 +26,7 @@ wheels/
 *.egg
 .idea/
 private_config.py
+.vscode/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
