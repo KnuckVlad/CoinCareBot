@@ -3,23 +3,28 @@
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 version: 2
 jobs:
-  one:
+  test:
     docker:
       - image: circleci/python:3.6.4
     steps:
       - checkout
-      - run: echo "A first hello"
+      - run: echo "building test project with run-test.py"
+      - run: run-test.py
       - run: sleep 25
-  two:
+      
+  prod:
     docker:
       - image: circleci/python:3.6.4
     steps:
       - checkout
-      - run: echo "A more familiar hi"
+      - run: echo "building production project with run.py"
+      - run: run.py
       - run: sleep 15
 workflows:
   version: 2
   one_and_two:
     jobs:
-      - one
-      - two
+      - test
+      - prod:
+        requires:
+          - test
