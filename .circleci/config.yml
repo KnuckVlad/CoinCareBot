@@ -4,27 +4,45 @@
 version: 2
 jobs:
   test:
+    working_directory: ~/coincarebot
     docker:
       - image: circleci/python:3.6.4
     steps:
-      - checkout
-      - run: echo "building test project with run-test.py"
-      - run: run-test.py
-      - run: sleep 25
+    - checkout
+    - run: sudo chown -R circleci:circleci /usr/local/bin
+    - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+    - restore_cache:
+        key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+    - run:
+        command: |
+          sudo pip install pipenv
+          pipenv install
+    - save_cache:
+        key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+        paths:
+          - ".venv"
+          - "/usr/local/bin"
+          - "/usr/local/lib/python3.6/site-packages"
+    - run:
+        command: |
+          pipenv run "python run-test.py"
+    - store_test_results:
+        path: test-results
+    - store_artifacts:
+        path: test-results
+        destination: tr1
       
   prod:
     docker:
       - image: circleci/python:3.6.4
     steps:
       - checkout
-      - run: echo "building production project with run.py"
-      - run: run.py
+      - run: echo "The building completed!"
       - run: sleep 15
+      
 workflows:
   version: 2
   one_and_two:
     jobs:
       - test
-      - prod:
-        requires:
-          - test
+      - prod
