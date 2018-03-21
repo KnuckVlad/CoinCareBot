@@ -1,36 +1,25 @@
 # Python CircleCI 2.0 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-python/ for more details
-#version: 2
+version: 2
 jobs:
-  build:
+  one:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/python:3.6.4
     steps:
       - checkout
       - run: echo "A first hello"
-  build:
+      - run: sleep 25
+  two:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/python:3.6.4
     steps:
       - checkout
-      - run: echo "A first hello"
-
-   # Download and cache dependencies
-   - restore_cache:
-       keys:
-       - v1-dependencies-{{ checksum "requirements.txt" }}
-       # fallback to using the latest cache if no exact match is found
-       - v1-dependencies-
-
-   - run:
-       name: install dependencies
-       command: |
-         python3 -m venv venv
-         . venv/bin/activate
-         pip install -r requirements.txt
-
-   - save_cache:
-       paths:
-         - ./venv
-       key: v1-dependencies-{{ checksum "requirements.txt" }}
+      - run: echo "A more familiar hi"
+      - run: sleep 15
+workflows:
+  version: 2
+  one_and_two:
+    jobs:
+      - one
+      - two
